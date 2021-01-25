@@ -1,0 +1,83 @@
+#include<stdio.h>
+#include<stdlib.h>
+//when linked list is used,structure of node has to declared first
+//Linked list node is having two parts as data and address
+//Linked list means Singly Linked List or List or Chain also
+struct node   
+{  
+int data;  
+struct node *next;  
+};  
+
+struct node *top;  //top is current node having two parts data and next so declare it as type struct node 
+
+//Function Declarations 
+void push();
+void pop();
+void display();
+
+void main()
+{
+	int choice;
+	top=NULL; //top=NULL means linked list is empty 
+	do //menu driven program 
+	{
+	printf("\n1.Push\n2.Pop\n3.Display\n4.Exit");
+		printf("\n Enter Your Choice ");
+		scanf("%d",&choice);
+		switch(choice)
+		{
+			case 1:push(); //function call
+			break;
+			case 2:pop();//function call
+			break;
+			case 3:display();//function call
+			break;
+			case 4:exit(0);//standard function for exiting output 
+			break;
+		}//end of switch 
+		}while(choice!=4);//end of do while
+	}//end of main()
+
+void push ()  
+{  
+    int info;  
+    //for pushing i.e inserting a new node in linked list,three things should be followed
+    //1.Declare node 2.Allocate memory dynamically to node  3.Set the pointers of node
+	struct node *temp; //declared new node temp
+	temp = (struct node *)malloc(sizeof(struct node));   //allocate dynamic memory by malloc() to temp
+	//malloc() will return an address to temp at run time 
+printf("\nEnter value to be pushed : ");
+	scanf("%d",&info);
+	temp->data=info; //new value is temp->data 
+	temp->next=top; //after pushing,top is new node's next part i.e temp->next  
+	top=temp;//new node temp become top now 
+	printf("\nInserted value is %d",temp->data);//printing inserted value 
+}  
+void pop()  
+{  
+   struct node *temp;  
+   if(top==NULL)//check if linked list is empty 
+printf("\nStack is empty");
+   else//linked list is not empty 
+   {
+   temp=top;//choose node to be deleted 
+   top=temp->next;//temp->next will become new top now 
+printf("\nDeleted value is %d",temp->data);//printing deleted value 
+   }
+}
+void display()  
+{  
+    struct node *temp;  
+if(top == NULL)//check if linked list is empty.Youcant display values in empty linked list
+printf("\nStack is Empty!!!\n");
+   else//linked list is not empty 
+   {
+      temp=top; //make top as temp
+while(temp!= NULL) //till temp doesnt reach NULL means linked list is empty 
+	{
+	printf("\n%d",temp->data); //print values 
+	 temp = temp -> next;	 //for going to next node means make new temp as old temp's next 
+    }//end of while
+    }//end of else
+} //end of display()
